@@ -1,6 +1,6 @@
 import openfoodfacts
 from products import * 
-import menu 
+from menu import Menu 
 def ChooseMenu():
 	print("Bienvenue dans ce programme de gestion de bar. \n Que souhaitez-vous faire? ")
 
@@ -9,5 +9,11 @@ def ChooseMenu():
 	return _choice 
 
  
-choice = ChooseMenu() 
+# choice = ChooseMenu() 
+
+Mymenu = Menu()
+
+Mymenu.AddToMenu(chouffe,coca)
+Mymenu.DeleteOfMenu()
+
 
