@@ -6,9 +6,21 @@ class Products:
 	def __init__(self, name, price) -> None:
 		self.__name = name  
 		self.__price = price 
-	
+		self.current = 0
 	def __str__(self):
 		return self.DisplayProductsInfos()
+
+	def __iter__(self): 
+		return self 
+
+	def __next__(self):
+		self.current +=1 
+		if self.current > self.end : 
+			raise StopIteration 
+		else: 
+			return self.current - 1 
+
+
 
 	def getName(self):
 		return self.__name
@@ -27,17 +39,17 @@ class Products:
 			print(f"{item.replace('_Products__','').replace('_Drinks__','').replace('_Beers__','')} : {self.__dict__[item]}")
 		print ("-------------------------------")
 
+
 class Drinks(Products): 
 	__quantity = 0 # en cl
 	__brand = ""  #Marque
 	__isBottle = False 
 	__isCan = False 	
 
-	def __init__(self, name, price, quantity, brand, isB0ottle=False, isCan= False) -> None:
+	def __init__(self, name, price, quantity,  isB0ottle=False, isCan= False) -> None:
 		super().__init__(name, price)
 
 		self.__quantity = quantity 
-		self.__brand = brand
 		self.__isBottle = isB0ottle
 		self.__isCan = isCan 
 	
@@ -73,7 +85,7 @@ class SoftDrinks(Drinks):
 
 
 chouffe = Beers("Chouffe", 4.5,75,8) 
-coca = SoftDrinks("Coca-Cola", 2, 100, "Coca-Cola",True, True)
+coca = SoftDrinks("Coca-Cola", 2, 100,True, True)
 
 
 if __name__ == '__main__': 

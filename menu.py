@@ -33,11 +33,11 @@ class Menu():
 		column = 0
 		for element in item:
 			self.__list_of_products.append(element)	 
-			# # for i in [item[0].getName(), item[0].getPrice(), item[0].getAlcoholLevel()]:
-			# sheet1.write(row,column,"Coucou") 
-			# column+=1 
-			# column = 0
-			# row+=1 
+			for i in [item[0].getName(), item[0].getPrice(), item[0].getAlcoholLevel()]:
+				sheet1.write(row,column,"Coucou") 
+				column+=1 
+			column = 0
+			row+=1 
 
 
 			
