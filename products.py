@@ -7,7 +7,7 @@ class Products:
 		self.__name = name  
 		self.__price = price 
 	
-	def __str__(self) -> str:
+	def __str__(self):
 		return self.DisplayProductsInfos()
 
 	def getName(self):
@@ -24,7 +24,7 @@ class Products:
 	def DisplayProductsInfos(self):
 		print(f"------------ Fiche produit pour {self.getName()} ------------------------")
 		for item in self.__dict__: 
-			print(f"{item} : {self.__dict__[item]}")
+			print(f"{item.replace('_Products__','').replace('_Drinks__','').replace('_Beers__','')} : {self.__dict__[item]}")
 		print ("-------------------------------")
 
 class Drinks(Products): 
@@ -78,6 +78,5 @@ coca = SoftDrinks("Coca-Cola", 2, 100, "Coca-Cola",True, True)
 
 if __name__ == '__main__': 
 	coca.DisplayProductsInfos()
-
 	chouffe.DisplayProductsInfos()
 
