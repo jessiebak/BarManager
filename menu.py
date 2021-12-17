@@ -1,5 +1,5 @@
 from products import Products, Beers, SoftDrinks
-import xlsxwriter as xls 
+
 
 class Menu():
 	__product = ''
@@ -74,9 +74,6 @@ def createMenu(_menu):
 
 	return _menu
 
-excelMenu = xls.Workbook("Menu.xlsx")
-sheet1 = excelMenu.add_worksheet("Menu du Bar")
-excelMenu = createMenu(excelMenu)
 
 
 

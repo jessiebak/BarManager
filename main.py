@@ -2,8 +2,7 @@
 from math import e
 from products import * 
 from menu import *
-from menu import excelMenu
-import xlsxwriter as xls 
+
 from staff import Client
 from os import system
 import time
