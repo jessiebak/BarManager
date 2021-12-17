@@ -97,7 +97,10 @@ class Client :
 		langue = self.__langue
 		while True :
 			if langue == "FR":
-				client_money = float(input(f"Vous nous devez  donc {montant} euros \n Veuillez introduire votre argent"))
+				try :
+					client_money = float(input(f"Vous nous devez  donc {montant} euros \n Veuillez introduire votre argent"))
+				except:
+					print("Il faut un chiffre")
 				if client_money > montant: 
 					print(f"voici {client_money - montant} € de retour")
 					break

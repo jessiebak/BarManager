@@ -7,7 +7,7 @@ from staff import Client
 from os import system
 import time
 
-cls = system("cls")
+
 clientID = 0
 
 def CreateClient():
@@ -64,6 +64,7 @@ while choice != "0":
 	choice = ChooseMenu()	
 	print("---------------- Bar Manager-----------------")
 	if choice == 1: 
+		
 		# createMenu(excelMenu)
 		myMenu= Menu() 
 
@@ -81,22 +82,22 @@ while choice != "0":
 				print("Voici la liste de  tous les produits disponibles chez votre fournisseur")
 				for i, item in enumerate(AllProducts): 
 					print(f"#{i}")
-					print(item.DisplayProductsInfos())
+					item.DisplayProductsInfos()
 
-					userchoice = -1000
-					MenuProducts = []
-					while userchoice != 0:
-						userchoice = int(input("Quel numéro souhaitez-vous ajouter. \n Mettez 0 pour terminer"))
-						if 0 < userchoice <= len(AllProducts):
-							MenuProducts.append(AllProducts[userchoice-1])
-						elif userchoice == 0: 
-							print("Merci bien noté")
-							break
-						else: 
-							print("Désolé ce numéro ne fait pas partie de notre liste")
-							details = int(input("1. Description Détaillées \n  2. Nom des produits"))
-							
-							continue
+				userchoice = -1000
+				MenuProducts = []
+				while userchoice != 0:
+					userchoice = int(input("Quel numéro souhaitez-vous ajouter. \n Mettez 0 pour terminer"))
+					if 0 < userchoice <= len(AllProducts):
+						MenuProducts.append(AllProducts[userchoice-1])
+					elif userchoice == 0: 
+						print("Merci bien noté")
+						break
+					else: 
+						print("Désolé ce numéro ne fait pas partie de notre liste")
+						details = int(input("1. Description Détaillées \n  2. Nom des produits"))
+						
+						continue
 			elif details == 2: 
 				print("Voici la liste de  tous les produits disponibles chez votre fournisseur")
 				for i, item in enumerate(AllProducts):
@@ -125,7 +126,6 @@ while choice != "0":
 
 	elif choice  == 2: 
 		try:  
-			print("Veuillez d'abord composer votre menu avant de l'afficher")
 			for item in MenuProducts:
 				item.DisplayProductsInfos()
 		except (UnboundLocalError, NameError): 
@@ -141,4 +141,4 @@ while choice != "0":
 	elif choice == 4: 
 		print("Au revoir et à bientôt dans Bar Manager")
 
-excelMenu.close
+
