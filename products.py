@@ -1,26 +1,31 @@
+from typing import ChainMap
+
+
 class Products: 
 
 	__name = ""
 	__price = 0 
+	__content = []
 
 	def __init__(self, name, price) -> None:
 		self.__name = name  
-		self.__price = price 
-		self.current = 0
+		self.__price = price
+		self.__content.append(self) 
+
 	def __str__(self):
-		return self.DisplayProductsInfos()
+		return self.DisplayProductsInfos() 
+
+	def add(self):
+		self.__content.append(self)
 
 	def __iter__(self): 
-		return self 
+		return iter(self.content)
 
 	def __next__(self):
-		self.current +=1 
-		if self.current > self.end : 
-			raise StopIteration 
-		else: 
-			return self.current - 1 
+		return next(self.content)
 
-
+	def getContent(self):
+		return self.content
 
 	def getName(self):
 		return self.__name
@@ -82,11 +87,25 @@ class Beers(Drinks):
 
 class SoftDrinks(Drinks): 
 	pass
-
+AllProducts = []
 
 chouffe = Beers("Chouffe", 4.5,75,8) 
-coca = SoftDrinks("Coca-Cola", 2, 100,True, True)
+chimayBleue = Beers("Chimay Bleue", 4.5, 33,9)
+kasteelRouge = Beers("Kasteel rouge", 4.5, 33, 8)
+tripleKarmeliet = Beers("Triple Karmeliet", 4.5,33, 8.4)
+valDieuNoel = Beers("Val Dieu Noël ", 4, 33,7)
 
+
+[AllProducts.append(item) for item in [chouffe, chimayBleue, kasteelRouge,tripleKarmeliet,valDieuNoel]]
+
+
+
+coca = SoftDrinks("Coca-Cola", 2, 33,True, True)
+fanta = SoftDrinks("Fanta", 2, 33,True, True)
+tea = SoftDrinks("Iced-TEa", 2, 25,True, True)
+eau = SoftDrinks("Eau", 2, 50,True,False)
+
+[AllProducts.append(item) for item in  [coca, fanta, tea,eau]]
 
 if __name__ == '__main__': 
 	coca.DisplayProductsInfos()
