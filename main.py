@@ -4,8 +4,10 @@ from products import *
 from menu import *
 
 from staff import Client
-from os import system
+import os 
 import time
+
+cls = os.system('cls')
 
 
 clientID = 0
@@ -80,6 +82,7 @@ while choice != "0":
 	choice = ChooseMenu()	
 	print("---------------- Bar Manager-----------------")
 	if choice == 1: 
+		cls
 		
 		# createMenu(excelMenu)
 		myMenu= Menu() 
@@ -139,6 +142,7 @@ while choice != "0":
 		# os.startfile(f"{os.path.dirname((__file__))}\Menu.xlsx")
 
 	elif choice  == 2: 
+		cls
 		try:  
 			for item in MenuProducts:
 				item.DisplayProductsInfos()
@@ -146,6 +150,7 @@ while choice != "0":
 			print("Veuillez d'abord composer votre menu avant de l'afficher")
 
 	elif choice == 3:
+		cls
 		try:
 			if len(MenuProducts) >0: 
 				clientOne = CreateClient()
@@ -153,8 +158,8 @@ while choice != "0":
 		except (UnboundLocalError, NameError): 
 			print("Veuillez d'abord composer votre menu avant d'inviter un client à commander")
 	elif choice == 4: 
+		cls
 		print("Au revoir et à bientôt dans Bar Manager")
-	elif choice == 5: 
-		print("Encaisser une table")
+	
 
 

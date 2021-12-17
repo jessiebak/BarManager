@@ -39,9 +39,9 @@ class Products:
 		self.__price = value
 
 	def DisplayProductsInfos(self):
-		print(f"------------ Fiche produit pour {self.getName()} ------------------------")
+		print(f"------------ Fiche produit pour {self.getName()} ------------------------")	
 		for item in self.__dict__: 
-			print(f"{item.replace('_Products__','').replace('_Drinks__','').replace('_Beers__','')} : {self.__dict__[item]}".replace("isCan : False", "Non disponible en canette".replace("isCan : True", "Disponible en canette").replace("isBottle : True", "En Bouteille".replace("isBottle : True", "Disponibe en Bouteille"))))
+			print(f"{item.replace('_Products__','').replace('_Drinks__','').replace('_Beers__','')} : {self.__dict__[item]}".replace("isCan : False", "Non disponible en canette").replace("isCan : True", "Disponible en canette").replace("isBottle : True", "En Bouteille").replace("isBottle : True", "Disponibe en Bouteille").replace("name :", "Nom :").replace("price :", "Prix :").replace("quantity :", "Quantité en cl :"))
 		print ("-------------------------------")
 
 
