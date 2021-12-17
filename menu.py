@@ -28,17 +28,10 @@ class Menu():
 		return self.DisplayMenu()
 
 	def AddToMenu(self,*item):
-		global sheet1
-		row = 2
-		column = 0
+		
 		for element in item:
 			self.__list_of_products.append(element)	 
-			for i in [item[0].getName(), item[0].getPrice(), item[0].getAlcoholLevel()]:
-				sheet1.write(row,column,"Coucou") 
-				column+=1 
-			column = 0
-			row+=1 
-
+			
 
 			
 		
@@ -57,24 +50,6 @@ class Menu():
 			index = int(input("Votre choix : ")) + 1
 			deleteditem = self.__list_of_products.pop(index)
 			print(f"Le produit suivant vient d'être supprimé: {deleteditem}")
-
-
-def createMenu(_menu): 
-	global sheet1 
-	
-	Titles = ["Produits", "Prix", "% Alc"]
-	row =0
-	column = 0 
-
-	for title in Titles:
-		sheet1.write(row, column, title)
-		column+=1 
-		
-		# for i, product  in enumerate(Mymenu.getListOfProducts()):
-
-	return _menu
-
-
 
 
 if __name__ == '__main__': 

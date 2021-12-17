@@ -32,9 +32,16 @@ def ChooseProduct(client, AllProduct):
 		for number, item in enumerate(AllProduct):
 			print("n°", number + 1, ":", item.getName())
 		_choose = -1000
-		while 0 < _choose < len(AllProduct+1): 
-			_choose = int(input("Votre choix : \t")) - 1
-			_quantity = int(input("Combien en voulez-vous :\n"))
+		_quantity = 1
+		while 0 < _choose < len(AllProduct+1) or _quantity == 1: 
+			try: 
+				_choose = int(input("Votre choix : \t")) - 1
+			except ValueError: 
+				print("Il faut un chiffre")
+			try:		
+				_quantity = int(input("Combien en voulez-vous :\n"))
+			except ValueError:
+				print("il faut un chiffre")
 			_listChoose.append(AllProduct[_choose])
 			client.addProduct([_listChoose[0], _quantity])
 		client.PrintReceipt()
@@ -42,11 +49,20 @@ def ChooseProduct(client, AllProduct):
 		print("Choose your product in the next list: \n")
 		for number, item in enumerate(AllProduct):
 			print("n°", number + 1, ":", item.getName())
-		_choose = int(input("Your choose: \t ")) - 1
-		_quantity = int(input("How many do you want:\n"))
-		_listChoose.append(AllProduct[_choose])
-		client.addProduct([_listChoose[0], _quantity])
-		client.PrintReceipt()
+		_quantity = 1
+		while 0 < _choose < len(AllProduct+1) or _quantity !=0:
+			try: 
+				_choose = int(input("Your choose: 0 if you're finished \t  ")) - 1
+			except ValueError:
+				print("il faut un chiffre")
+			try : 
+				_quantity = int(input("How many do you want:\n"))
+			except ValueError:
+				print("It's a number")
+		
+			_listChoose.append(AllProduct[_choose])
+			client.addProduct([_listChoose[0], _quantity])
+			client.PrintReceipt()
 
 
 
@@ -81,9 +97,25 @@ while choice != "0":
 			
 				print("Voici la liste de  tous les produits disponibles chez votre fournisseur")
 				for i, item in enumerate(AllProducts): 
-					print(f"#{i}")
+					
+					print(f"\n\n#{i}")
 					item.DisplayProductsInfos()
 
+				userchoice = -1000
+				MenuProducts = []
+				while userchoice != 0:
+					userchoice = int(input("Quel numéro souhaitez-vous ajouter. \n Mettez 0 pour terminer"))
+					if 0 < userchoice <= len(AllProducts):
+						MenuProducts.append(AllProducts[userchoice-1])
+					elif userchoice == 0: 
+						print("Merci bien noté")
+					else: 
+						print("Désolé ce numéro ne fait pas partie de notre liste")
+						
+			elif details == 2: 
+				print("Voici la liste de  tous les produits disponibles chez votre fournisseur")
+				for i, item in enumerate(AllProducts):
+					print(f"n°{i+1} : {item.getName()}")
 				userchoice = -1000
 				MenuProducts = []
 				while userchoice != 0:
@@ -98,24 +130,6 @@ while choice != "0":
 						details = int(input("1. Description Détaillées \n  2. Nom des produits"))
 						
 						continue
-			elif details == 2: 
-				print("Voici la liste de  tous les produits disponibles chez votre fournisseur")
-				for i, item in enumerate(AllProducts):
-					print(f"n°{i+1} : {item.getName()}")
-		userchoice = -1000
-		MenuProducts = []
-		while userchoice != 0:
-			userchoice = int(input("Quel numéro souhaitez-vous ajouter. \n Mettez 0 pour terminer"))
-			if 0 < userchoice <= len(AllProducts):
-				MenuProducts.append(AllProducts[userchoice-1])
-			elif userchoice == 0: 
-				print("Merci bien noté")
-				break
-			else: 
-				print("Désolé ce numéro ne fait pas partie de notre liste")
-				details = int(input("1. Description Détaillées \n  2. Nom des produits"))
-				
-				continue
 
 		else: 
 			print("Voici les produits déjà disponible dans votre magasin")
@@ -140,5 +154,7 @@ while choice != "0":
 			print("Veuillez d'abord composer votre menu avant d'inviter un client à commander")
 	elif choice == 4: 
 		print("Au revoir et à bientôt dans Bar Manager")
+	elif choice == 5: 
+		print("Encaisser une table")
 
 

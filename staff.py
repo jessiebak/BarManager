@@ -93,7 +93,10 @@ class Client :
 				totalWithReduction+= self.__listing[i][0].getPrice() * self.__listing[i][1] * 1.17			
 		return round(totalWithReduction, 2)
 
+	
+
 	def paiement(self,montant):
+		
 		langue = self.__langue
 		while True :
 			if langue == "FR":
@@ -110,7 +113,10 @@ class Client :
 				else: 
 					print(f"Désolé mais ce n'est pas assez ! Il vous manque {montant - client_money} euros. Reesayer")
 			if langue == "EN":
-				client_money = float(input(f"Vou have to pay {montant} dollars \n Enter your money"))
+				try:
+					client_money = float(input(f"Vou have to pay {montant} dollars \n Enter your money"))
+				except:
+					print("Il faut un chiffre")
 				if client_money > montant: 
 					print(f"Here are {client_money - montant} dollars in change")
 					break

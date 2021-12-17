@@ -41,7 +41,7 @@ class Products:
 	def DisplayProductsInfos(self):
 		print(f"------------ Fiche produit pour {self.getName()} ------------------------")
 		for item in self.__dict__: 
-			print(f"{item.replace('_Products__','').replace('_Drinks__','').replace('_Beers__','')} : {self.__dict__[item]}")
+			print(f"{item.replace('_Products__','').replace('_Drinks__','').replace('_Beers__','')} : {self.__dict__[item]}".replace("isCan : False", "Non disponible en canette".replace("isCan : True", "Disponible en canette").replace("isBottle : True", "En Bouteille".replace("isBottle : True", "Disponibe en Bouteille"))))
 		print ("-------------------------------")
 
 
@@ -50,6 +50,7 @@ class Drinks(Products):
 	__brand = ""  #Marque
 	__isBottle = False 
 	__isCan = False 	
+	
 
 	def __init__(self, name, price, quantity,  isB0ottle=False, isCan= False) -> None:
 		super().__init__(name, price)
@@ -84,15 +85,16 @@ class Beers(Drinks):
 		super().__init__(name, price, quantity, alcoholLevel)
 		self.__quantity = quantity 
 		self.__alcoholLevel = alcoholLevel 
+		
 
 class SoftDrinks(Drinks): 
 	pass
 AllProducts = []
 
-chouffe = Beers("Chouffe", 4.5,75,8) 
-chimayBleue = Beers("Chimay Bleue", 4.5, 33,9)
-kasteelRouge = Beers("Kasteel rouge", 4.5, 33, 8)
-tripleKarmeliet = Beers("Triple Karmeliet", 4.5,33, 8.4)
+chouffe = Beers("Chouffe", 2.5,75,8) 
+chimayBleue = Beers("Chimay Bleue", 2.5, 33,9)
+kasteelRouge = Beers("Kasteel rouge", 2, 33, 8)
+tripleKarmeliet = Beers("Triple Karmeliet", 3.5,33, 8.4)
 valDieuNoel = Beers("Val Dieu Noël ", 4, 33,7)
 
 
@@ -100,9 +102,9 @@ valDieuNoel = Beers("Val Dieu Noël ", 4, 33,7)
 
 
 
-coca = SoftDrinks("Coca-Cola", 2, 33,True, True)
-fanta = SoftDrinks("Fanta", 2, 33,True, True)
-tea = SoftDrinks("Iced-TEa", 2, 25,True, True)
+coca = SoftDrinks("Coca-Cola", 1.50, 33,True, True)
+fanta = SoftDrinks("Fanta", 1.50, 33,True, True)
+tea = SoftDrinks("Iced-TEa", 1.25, 25,True, True)
 eau = SoftDrinks("Eau", 2, 50,True,False)
 
 [AllProducts.append(item) for item in  [coca, fanta, tea,eau]]
