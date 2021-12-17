@@ -4,10 +4,10 @@ from menu import *
 from menu import excelMenu
 import xlsxwriter as xls 
 from staff import Client
-import os
+from os import system
 import time
 
-
+cls = system("cls")
 clientID = 0
 
 def CreateClient():
@@ -50,7 +50,7 @@ def ChooseProduct(client, AllProduct):
 
 # import interface
 def ChooseMenu():
-	_choice = int(input(" 1. Créer un menu pour votre bar ?  \n 2. Afficher le menu.  \n 3. Faire payer votre client. \n 0. Quitter\n\n Entrez votre choix : \t "))
+	_choice = int(input(" 1. Modifier le  menu pour votre bar ?  \n 2. Afficher le menu.  \n 3. Faire payer votre client. \n 0. Quitter\n\n Entrez votre choix : \t "))
 	return _choice 
 	
 
@@ -62,20 +62,42 @@ while choice != "0":
 	choice = ChooseMenu()	
 	print("---------------- Bar Manager-----------------")
 	if choice == 1: 
-		createMenu(excelMenu)
+		# createMenu(excelMenu)
 		myMenu= Menu() 
-		# myMenu.AddToMenu(chouffe,coca)
+
 		if len(myMenu.getListOfProducts()) == 0: 
 			print("Le Menu est vide pour l'instant")
-			see_content = int(input("Voulez-vous voir la listes des produits disponibles chez votre fournisseur  aifin de les ajouter? \n 1. oui \n 2. Non  \n\n Votre réponse : \t"))
-			if see_content == 1:
-				print ("Voici la liste de  tous les produits disponibles chez votre fournisseur")
-				
-				for i in Products.add(): 
-					print(i)
-				# for item in Products.__dict__:
-				# 	print(item)
+			print("Voulez vous afficher les détails des produits disponibles ou juste le nom des produits")
+		
+			
+			details= 0
+			while details not in [1,2]:
+				details = int(input("1. Description Détaillées \n  2. Nom des protuis"))
+			if details == 1: 	
+			# myMenu.AddToMenu(chouffe,coca)
+			
+				print("Voici la liste de  tous les produits disponibles chez votre fournisseur")
+				for i in AllProducts: 
+					print(i.DisplayProductsInfos())
+			elif details == 2: 
+				print("Voici la liste de  tous les produits disponibles chez votre fournisseur")
+				for i, item in enumerate(AllProducts):
+					print(f"n°{i+1} : {item.getName()}")
+		userchoice = -1000
+		MenuProducts = []
+		while userchoice != 0:
+			userchoice = int(input("Quel numéro souhaitez-vous ajouter. \n Mettez 0 pour terminer"))
+			if 0 < userchoice <= len(AllProducts):
+				MenuProducts.append(AllProducts[userchoice-1])
+			elif userchoice == 0: 
+				print("Merci bien noté")
 				break
+			else: 
+				print("Désolé ce numéro ne fait pas partie de notre liste")
+				details = int(input("1. Description Détaillées \n  2. Nom des produits"))
+				
+				continue
+
 		else: 
 			print("Voici les produits déjà disponible dans votre magasin")
 			myMenu.DisplayMenu()
@@ -84,12 +106,11 @@ while choice != "0":
 		# os.startfile(f"{os.path.dirname((__file__))}\Menu.xlsx")
 
 	elif choice  == 2: 
-
-		Mymenu = Menu()
-		Mymenu.DisplayMenu()
+		for item in MenuProducts:
+			print(item)
 	elif choice == 3:
 		clientOne = CreateClient()
-		ChooseProduct(clientOne, AllProducts)
+		ChooseProduct(clientOne, MenuProducts)
 	elif choice == 4: 
 		print("Au revoir et à bientôt dans Bar Manager")
 
