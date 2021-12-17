@@ -1,4 +1,5 @@
 
+from math import e
 from products import * 
 from menu import *
 from menu import excelMenu
@@ -31,10 +32,12 @@ def ChooseProduct(client, AllProduct):
 		print("Veuillez choisir vos produits dans la liste suivante : \n")
 		for number, item in enumerate(AllProduct):
 			print("n°", number + 1, ":", item.getName())
-		_choose = int(input("Votre choix : \t")) - 1
-		_quantity = int(input("Combien en voulez-vous :\n"))
-		_listChoose.append(AllProduct[_choose])
-		client.addProduct([_listChoose[0], _quantity])
+		_choose = -1000
+		while 0 < _choose < len(AllProduct+1): 
+			_choose = int(input("Votre choix : \t")) - 1
+			_quantity = int(input("Combien en voulez-vous :\n"))
+			_listChoose.append(AllProduct[_choose])
+			client.addProduct([_listChoose[0], _quantity])
 		client.PrintReceipt()
 	elif client.GetLangue() == "EN":
 		print("Choose your product in the next list: \n")
@@ -77,8 +80,24 @@ while choice != "0":
 			# myMenu.AddToMenu(chouffe,coca)
 			
 				print("Voici la liste de  tous les produits disponibles chez votre fournisseur")
-				for i in AllProducts: 
-					print(i.DisplayProductsInfos())
+				for i, item in enumerate(AllProducts): 
+					print(f"#{i}")
+					print(item.DisplayProductsInfos())
+
+					userchoice = -1000
+					MenuProducts = []
+					while userchoice != 0:
+						userchoice = int(input("Quel numéro souhaitez-vous ajouter. \n Mettez 0 pour terminer"))
+						if 0 < userchoice <= len(AllProducts):
+							MenuProducts.append(AllProducts[userchoice-1])
+						elif userchoice == 0: 
+							print("Merci bien noté")
+							break
+						else: 
+							print("Désolé ce numéro ne fait pas partie de notre liste")
+							details = int(input("1. Description Détaillées \n  2. Nom des produits"))
+							
+							continue
 			elif details == 2: 
 				print("Voici la liste de  tous les produits disponibles chez votre fournisseur")
 				for i, item in enumerate(AllProducts):
@@ -106,11 +125,20 @@ while choice != "0":
 		# os.startfile(f"{os.path.dirname((__file__))}\Menu.xlsx")
 
 	elif choice  == 2: 
-		for item in MenuProducts:
-			print(item)
+		try:  
+			print("Veuillez d'abord composer votre menu avant de l'afficher")
+			for item in MenuProducts:
+				item.DisplayProductsInfos()
+		except (UnboundLocalError, NameError): 
+			print("Veuillez d'abord composer votre menu avant de l'afficher")
+
 	elif choice == 3:
-		clientOne = CreateClient()
-		ChooseProduct(clientOne, MenuProducts)
+		try:
+			if len(MenuProducts) >0: 
+				clientOne = CreateClient()
+				ChooseProduct(clientOne, MenuProducts)
+		except (UnboundLocalError, NameError): 
+			print("Veuillez d'abord composer votre menu avant d'inviter un client à commander")
 	elif choice == 4: 
 		print("Au revoir et à bientôt dans Bar Manager")
 
